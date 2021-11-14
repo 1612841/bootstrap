@@ -1,0 +1,435 @@
+// để ý width và basis, đi chung với nhau(basis auto(thay đổi chiềU cao, chiều rộng auto, 0% là ko thay đổi chiều cao và rộng phần tử) mà width100% sẽ nhảy xuống)
+
+:root {
+    --col-1 : calc(100%/12 - 0.09%);
+}
+
+* > li {
+    list-style: none;
+    text-decoration: none;
+    padding: 0.25rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+    text-align: -webkit-match-parent;
+    &:hover {
+        background-color: rgb(253, 253, 253);
+    }
+}
+
+$number: (1,2,3,4,5,6,7,8,9,10,11,12);
+
+$color: (  --blue: #0d6efd,
+--indigo: #6610f2,
+--purple: #6f42c1,
+--pink: #d63384,
+--red: #dc3545,
+--orange: #fd7e14,
+--yellow: #ffc107,
+--green: #198754,
+--teal: #20c997,
+--cyan: #0dcaf0,
+--white: #fff,
+--gray: #6c757d,
+--gray-dark: #343a40,
+--gray-100: #f8f9fa,
+--gray-200: #e9ecef,
+--gray-300: #dee2e6,
+--gray-400: #ced4da,
+--gray-500: #adb5bd,
+--gray-600: #6c757d,
+--gray-700: #495057,
+--gray-800: #343a40,
+--gray-900: #212529,
+--primary: #0d6efd,
+--secondary: #6c757d,
+--success: #198754,
+--info: #0dcaf0,
+--warning: #ffc107,
+--danger: #dc3545,
+--light: #f8f9fa,
+--dark: #212529);
+
+$namealign: (l: left, r: right, b: bottom, t: top);
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    @media screen and (min-width: 1400px) {
+        max-width: 1320px;
+        margin: 0 auto;
+    }
+    &-xl {
+        width: 100%;
+        margin: 0 auto;
+        @media screen and (min-width: 1200px) {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+    }
+    &-lg {
+        width: 100%;
+        margin: 0 auto;
+        @media screen and (min-width: 992px) {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+    }
+    &-md {
+        width: 100%;
+        margin: 0 auto;
+        @media screen and (min-width: 768px) {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+    }
+    &-sm {
+        width: 100%;
+        margin: 0 auto;
+        @media screen and (min-width: 576px) {
+            max-width: 540px;   
+            margin: 0 auto;
+        }
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 0 0%;
+    flex-direction: row;
+}
+
+@mixin col ($width) {
+    width: $width;
+    padding: 0.75rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.col {
+    flex: 1 0 0% ;
+    @include col(100%);
+    @each $item in $number {
+        &-#{$item} {
+            @include col(calc(var(--col-1)*(#{$item})));
+            flex: 1 0 auto;
+        };
+    }
+    &-xs {
+        @include col(100%);
+        @media screen and (min-width: 0px) {
+            flex: 1 0 0%;
+            -webkit-box-flex: 1;
+        }
+        @each $item in $number {
+            &-#{$item} {
+                @include col(calc(var(--col-1)*(#{$item})));
+                @media screen and (min-width: 0px) {
+                    flex: 1 0 auto !important;
+                }
+            };
+        }
+    }
+    &-sm {
+        @include col(100%);
+        @media screen and (min-width: 576px) {
+            flex: 1 0 0% ;
+        }
+        @each $item in $number {
+            &-#{$item} {
+                @include col(calc(var(--col-1)*(#{$item})));
+                @media screen and (min-width: 576px) {
+                    flex: 1 0 auto !important;
+                }
+            };
+        }
+    }
+    &-md {
+        @include col(100%);
+        @media screen and (min-width: 768px) {
+            flex: 1 0 0%;
+            -webkit-box-flex: 1;
+        }
+        @each $item in $number {
+            &-#{$item} {
+                @include col(calc(var(--col-1)*(#{$item})));
+                @media screen and (min-width: 768px) {
+                    flex: 1 0 auto !important;
+                }
+            };
+        }
+    }
+    &-lg {
+        @include col(100%);
+        @media screen and (min-width: 992px) {
+            flex: 1 0 0%;
+            -webkit-box-flex: 1;
+        }
+        @each $item in $number {
+            &-#{$item} {
+                @include col(calc(var(--col-1)*(#{$item})));
+                @media screen and (min-width: 992px) {
+                    flex: 1 0 auto !important;
+                }
+            };
+        }
+    }
+    &-xl {
+        @include col(100%);
+        @media screen and (min-width: 1200px) {
+            flex: 1 0 0%;
+            -webkit-box-flex: 1;
+        }
+        @each $item in $number {
+            &-#{$item} {
+                @include col(calc(var(--col-1)*(#{$item})));
+                @media screen and (min-width: 1200px) {
+                    flex: 1 0 auto !important;
+                }
+            };
+        }
+    }
+}
+
+.d {
+    &-flex {
+        display: flex;
+    }
+    &-block {
+        display: block;
+    }
+    &-none {
+        display: none;
+    }
+    &-inline {
+        display: inline;
+    }
+}
+
+.justify {
+    &-content {
+        &-center {
+            justify-content: center;
+        }
+        &-left {
+            justify-content: left;
+        }
+        &-right {
+            justify-content: right;
+        }
+        &-start {
+            justify-content: flex-start;
+        }
+        &-end {
+            justify-content: flex-end;
+        }
+        &-space {
+            &-between {
+                justify-content: space-between;
+            }
+            &-evenly {
+                justify-content: space-evenly;
+            }
+            &-around {
+                justify-content: space-around;
+            }
+        }
+    }
+}
+
+.order {
+    @each $item, $glyph in $number {
+        &-#{$item} {
+        order: #{$item}
+        };
+    }
+    &-first {
+        order: -1 !important;
+    }
+    &-last {
+        order: 12 !important;
+    }
+}
+
+.align {
+    &-items {
+        &-start{
+            align-items: flex-start;
+        } 
+        &-center {
+            align-items: center;
+        }
+        &-end {
+            align-items: flex-end;
+        }
+    }
+    &-self {
+        &-start {
+            align-self: flex-start;
+        }
+        &-center {
+            align-self: center;
+        }
+        &-end {
+            align-self: flex-end;
+        }
+    }
+}
+
+.bg {
+    @each $params, $value in $color {
+        &-#{str-slice(#{$params}, 3)} {
+            background: #{$value}
+        }
+    }
+    &-color {
+        @each $params, $value in $color {
+            &-#{str-slice(#{$params}, 3)} {
+                background-color: #{$value}
+            }
+        }
+    }
+    &-repeat {
+        &-no-repeat {
+            background-repeat: no-repeat;
+        }
+        &-repeat {
+            background-repeat: repeat;
+        }
+    }
+    &-size {
+        &-cover {
+            background-size: cover;
+        }
+    }
+}
+
+.color {
+    @each $params, $value in $color {
+        &-#{str-slice(#{$params}, 3)} {
+            color: #{$value}
+        }
+    }
+}
+
+.offset {
+    @each $item in $number {
+        &-#{$item} {
+            margin-left: calc(var(--col-1)*(#{$item}));
+        };
+    }
+}
+.btn {
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    border: none;
+}
+
+// margin
+.m {
+    @for $i from 0 through 1000 {
+        &-#{$i}{
+            margin-left: calc(#{$i}*0.1%);
+            margin-right: calc(#{$i}*0.1%);
+            margin-top: calc(#{$i}*0.1%);
+            margin-bottom: calc(#{$i}*0.1%);
+        }
+    }
+    @each $summary, $value in $namealign {
+        &#{$summary} {
+            @for $i from 0 through 1000 {
+                &-#{$i}{
+                    margin-#{$value}: calc(#{$i}*0.1%);
+                }
+            }
+        }
+    }
+}
+
+// padding
+
+.p {
+    @for $i from 0 through 1000 {
+        &-#{$i}{
+            padding-left: calc(#{$i}*0.1%);
+            padding-right: calc(#{$i}*0.1%);
+            padding-top: calc(#{$i}*0.1%);
+            padding-bottom: calc(#{$i}*0.1%);
+        }
+    }
+    @each $summary, $value in $namealign {
+        &#{$summary} {
+            @for $i from 0 through 1000 {
+                &-#{$i}{
+                    padding-#{$value}: calc(#{$i}*0.1%);
+                }
+            }
+        }
+    }
+}
+
+.border {
+    border: 0.005px solid rgb(223, 221, 221);
+}
+
+.border-radius {
+    @for $i from 0 through 1000 {
+        &-#{$i}{
+            border-radius: 4px;
+        }
+    }
+}
+
+.text {
+    &-align {
+        &-center {
+            text-align: center;
+        }
+        &-left {
+            text-align: left;
+        }
+        &-right {
+            text-align: right;
+        }
+    }
+}
+
+.position {
+    &-relative {
+        position: relative;
+    }
+    &-absolute {
+        position: absolute;
+    }
+    &-fixed {
+        position: fixed;
+    }
+}
+
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 4px;
+    &-nav {
+        display: flex;
+        flex-direction: column;
+        padding: auto 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+    &-link {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: #0d6efd;
+        text-decoration: none;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    }
+}
+
+/*  responsive */
